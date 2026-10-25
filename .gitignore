@@ -22,3 +22,6 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Generated Tauri platform schema
+src-tauri/gen/schemas/macOS-schema.json

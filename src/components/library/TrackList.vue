@@ -1,5 +1,16 @@
 <template>
-  <div v-show="props.isActive" ref="parentRef" class="p-4 overflow-y-auto h-full">
+  <div v-show="props.isActive" ref="parentRef" class="track-list p-4 overflow-y-auto h-full">
+    <div v-if="!trackIds.length" class="collection-empty">
+      <MusicNote />
+      <h2>{{ searchValue ? 'No matching tracks' : 'Your collection starts here' }}</h2>
+      <p>
+        {{
+          searchValue
+            ? 'Try another title, album, or artist, or adjust the lyrics filters.'
+            : 'Add music to your folders, then refresh your library from the options menu.'
+        }}
+      </p>
+    </div>
     <div :style="{ height: `${totalSize}px`, width: '100%', position: 'relative' }">
       <div class="w-full">
         <div class="w-full flex">
@@ -38,6 +49,7 @@
 </template>
 
 <script setup>
+import MusicNote from '~icons/mdi/music-note-outline'
 import TrackItem from './track-list/TrackItem.vue'
 import { useVirtualizer } from '@tanstack/vue-virtual'
 import { ref, computed, watch, onMounted } from 'vue'
@@ -54,7 +66,7 @@ const rowVirtualizer = useVirtualizer(
   computed(() => ({
     count: trackIds.value.length,
     getScrollElement: () => parentRef.value,
-    estimateSize: () => 52,
+    estimateSize: () => 62,
     overscan: 5,
     paddingStart: 32,
     getItemKey: index => trackIds.value[index],

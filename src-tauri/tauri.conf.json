@@ -8,7 +8,7 @@
   "bundle": {
     "active": true,
     "category": "Music",
-    "copyright": "",
+    "copyright": "Based on LRCGET \u00a9 Thang Tran and contributors. MIT license.",
     "windows": {
       "certificateThumbprint": null,
       "digestAlgorithm": "sha256",
@@ -26,20 +26,20 @@
       "deb": {
         "desktopTemplate": "../packaging/linux/lrcget.desktop",
         "files": {
-          "/usr/share/metainfo/lrcget.metainfo.xml": "../packaging/linux/lrcget.metainfo.xml"
+          "/usr/share/metainfo/app.lyripass.desktop.metainfo.xml": "../packaging/linux/lrcget.metainfo.xml"
         },
         "depends": []
       },
       "appimage": {
         "files": {
-          "/usr/share/metainfo/lrcget.metainfo.xml": "../packaging/linux/lrcget.metainfo.xml"
+          "/usr/share/metainfo/app.lyripass.desktop.metainfo.xml": "../packaging/linux/lrcget.metainfo.xml"
         },
         "bundleMediaFramework": false
       },
       "rpm": {
         "desktopTemplate": "../packaging/linux/lrcget.desktop",
         "files": {
-          "/usr/share/metainfo/lrcget.metainfo.xml": "../packaging/linux/lrcget.metainfo.xml"
+          "/usr/share/metainfo/app.lyripass.desktop.metainfo.xml": "../packaging/linux/lrcget.metainfo.xml"
         },
         "depends": []
       }
@@ -53,12 +53,12 @@
       "signingIdentity": "-"
     },
     "resources": [],
-    "shortDescription": "Utility for mass-downloading LRC synced lyrics for your offline music library.",
+    "shortDescription": "Your music library, with every word in time.",
     "targets": "all"
   },
-  "productName": "LRCGET",
-  "mainBinaryName": "LRCGET",
-  "identifier": "net.lrclib.lrcget",
+  "productName": "Lyripass",
+  "mainBinaryName": "lyripass",
+  "identifier": "app.lyripass.desktop",
   "plugins": {},
   "app": {
     "withGlobalTauri": false,
@@ -66,11 +66,11 @@
       {
         "fullscreen": false,
         "minWidth": 1024,
-        "minHeight": 768,
-        "width": 1024,
-        "height": 768,
+        "minHeight": 700,
+        "width": 1280,
+        "height": 840,
         "resizable": true,
-        "title": "LRCGET",
+        "title": "Lyripass",
         "decorations": true,
         "transparent": false,
         "useHttpsScheme": true
@@ -85,5 +85,6 @@
       },
       "csp": "default-src 'self'; img-src 'self' asset: https://asset.localhost; media-src *; connect-src ipc: http://ipc.localhost 'self' asset: *; style-src 'unsafe-inline' 'self'"
     }
-  }
+  },
+  "version": "0.1.0"
 }

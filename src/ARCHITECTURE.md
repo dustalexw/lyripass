@@ -1,4 +1,4 @@
-# LRCGET Frontend Architecture
+# Lyripass Frontend Architecture
 
 ## Architecture Overview
 
@@ -178,3 +178,12 @@ This enables the V2 lyrics editor to support playback for:
 **Framework**: Vitest. Run `npm test` (once) or `npm run test:watch` (watch mode).
 
 Tests live next to the source files they exercise (e.g. `word-tokenizer.test.js` for `word-tokenizer.js`). Add tests for any utilities that involve non-trivial branching logic (e.g. parsing, tokenization, transformations). `export-workflows.test.js` verifies shared preferences and batch snapshots with mocked commands. `download-options.test.js` uses a minimal Vue renderer to exercise all four album/artist trigger setups, recycling/unmount lifecycle, target isolation, and scope queries without a DOM or real downloads. DOM component tests are not yet set up.
+
+
+## Lyripass studio interface
+
+`BrandBar.vue` sits above both setup and the library. `ChooseDirectory.vue` keeps the native folder picker and directory persistence in a redesigned two-column setup. `Library.vue` adds the collection heading and a split workspace with the existing virtualized panes beside `LyricsInspector.vue`. The inspector uses the shared player, LRCLIB search, and V2 editor composables; lyrics come from `parseLyricsfile`, cues seek using `start_ms / 1000`, and highlighting respects explicit line end times and overlapping lines. The original bottom karaoke viewer and player remain available.
+
+The studio color tokens and layout are in `style.css`. Tailwind’s `hoa` accent is coral, and `neutral` uses graphite shades. Both light and dark appearances follow the existing theme preference. `About.vue` identifies the fork and credits upstream, without recommending upstream binary updates for Lyripass. The original SVG icon is in `public/lyripass.svg`; Tauri icon assets are generated from it.
+
+The frontend has no browser demo bridge. Browser verification injects official Tauri IPC mocks from an external test harness with synthetic tracks; fixture data is not shipped in the app.

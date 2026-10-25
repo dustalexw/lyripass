@@ -1,13 +1,6 @@
 <template>
-  <div
-    id="library-header"
-    class="px-4 py-2 h-12 flex justify-between gap-4 flex-none items-stretch"
-  >
-    <div class="flex-1 ml-2">
-      <MiniSearch :active-tab="props.activeTab" />
-    </div>
-
-    <div class="flex-1 flex gap-4 justify-center items-center text-sm">
+  <div id="library-header" class="library-toolbar">
+    <div class="library-tabs">
       <button
         class="tab"
         :class="{
@@ -39,9 +32,6 @@
         Artists
       </button>
 
-      <!-- Create a separator -->
-      <div class="w-[2px] h-[70%] bg-neutral-700/50" />
-
       <button
         class="tab"
         :class="{
@@ -54,10 +44,12 @@
       </button>
     </div>
 
-    <div class="flex-1 flex justify-end items-center gap-1">
+    <MiniSearch :active-tab="props.activeTab" />
+
+    <div class="library-actions">
       <button
         v-if="isBuildingQueue"
-        class="button button-disabled px-4 py-1.5 h-full min-w-[12rem] text-xs rounded-full"
+        class="button button-disabled px-4 py-1.5 h-full min-w-[8rem] text-xs rounded-full"
         disabled
         @click.prevent="$emit('showDownloadViewer')"
       >
@@ -71,7 +63,7 @@
 
       <button
         v-else-if="isDownloading && downloadedCount !== downloadTotalCount"
-        class="button button-working h-full min-w-[12rem] px-2 text-xs rounded-full"
+        class="button button-working h-full min-w-[8rem] px-2 text-xs rounded-full"
         @click.prevent="$emit('showDownloadViewer')"
       >
         <div class="animate-spin text-sm">
@@ -85,7 +77,7 @@
 
       <button
         v-else-if="isDownloading"
-        class="button button-done h-full min-w-[12rem] px-2 text-xs rounded-full"
+        class="button button-done h-full min-w-[8rem] px-2 text-xs rounded-full"
         @click.prevent="$emit('showDownloadViewer')"
       >
         <div class="text-sm">
@@ -96,11 +88,11 @@
 
       <button
         v-else
-        class="button button-primary h-full min-w-[12rem] px-2 text-xs rounded-full"
+        class="button button-primary h-full min-w-[8rem] px-2 text-xs rounded-full"
         @click.stop.prevent="openDownloadOptions"
       >
         <DownloadMultiple />
-        <span>Download all lyrics</span>
+        <span>Get lyrics</span>
       </button>
 
       <button
@@ -130,7 +122,7 @@
         ref="exportDropdown"
         theme="lrcget-dropdown"
         placement="bottom-end"
-        class="h-full aspect-square"
+        class="h-full"
         @show="openExportOptions"
       >
         <button
@@ -196,8 +188,11 @@
         </template>
       </VDropdown>
 
-      <VDropdown theme="lrcget-dropdown" placement="top-end" class="h-full aspect-square">
-        <button class="button button-normal h-full aspect-square rounded-full">
+      <VDropdown theme="lrcget-dropdown" placement="top-end" class="h-full">
+        <button
+          class="button button-normal h-full aspect-square rounded-full"
+          aria-label="Library options"
+        >
           <DotsVertical />
         </button>
         <template #popper>

@@ -1,41 +1,65 @@
 <template>
-  <div class="flex flex-col w-full h-full justify-center items-center">
-    <div class="px-4 py-2 flex flex-col gap-4 flex-none">
-      <div class="text-thin text-xl text-neutral-900 dark:text-neutral-200">Select directories</div>
-    </div>
-
-    <div class="grow flex flex-col items-center justify-center gap-8 w-full max-w-screen-sm">
-      <div class="flex flex-col gap-2 w-full justify-center items-center">
-        <div
-          v-for="(directory, index) in directories"
-          :key="directory"
-          class="w-full bg-neutral-100 dark:bg-neutral-900 text-neutral-900 dark:text-neutral-200 font-bold p-4 rounded-lg flex items-center"
-        >
-          <div class="grow">
-            {{ directory }}
+  <main class="setup-page">
+    <section class="setup-story">
+      <span class="studio-kicker">YOUR MUSIC. EVERY WORD.</span>
+      <h1>A home for<br />your music’s <em>lyrics.</em></h1>
+      <p>Bring your collection. Find the words. Keep everything in time.</p>
+      <div class="setup-features">
+        <div>
+          <span class="feature-number">01</span>
+          <div>
+            <strong>Connect your collection</strong>
+            <p>Choose a local folder or a mounted music drive.</p>
           </div>
+        </div>
+        <div>
+          <span class="feature-number">02</span>
+          <div>
+            <strong>Find the right lyrics</strong>
+            <p>Download synced lyrics from LRCLIB, across your library.</p>
+          </div>
+        </div>
+        <div>
+          <span class="feature-number">03</span>
+          <div>
+            <strong>Make every word yours</strong>
+            <p>Fine-tune timings, then export LRC, text, or embedded lyrics.</p>
+          </div>
+        </div>
+      </div>
+      <div class="setup-credit">Built on LRCGET <span>·</span> Reimagined as Lyripass</div>
+    </section>
+    <section class="glass-panel setup-folders">
+      <span class="studio-kicker">FROM · YOUR COLLECTION</span>
+      <h2>Where does your music live?</h2>
+      <p>Add the folders you want Lyripass to scan.</p>
+      <div class="directory-list">
+        <div v-for="(directory, index) in directories" :key="directory" class="directory-row">
+          <Folder class="folder-icon" />
+          <div class="directory-path">{{ directory }}</div>
           <button
-            class="flex-none button button-normal p-2 rounded-full"
-            @click.prevent="removeDirectory(index)"
+            class="icon-button"
+            :aria-label="`Remove ${directory}`"
+            @click="removeDirectory(index)"
           >
             <Close />
           </button>
         </div>
-
-        <button
-          class="w-full bg-neutral-50 dark:bg-neutral-900 hover:bg-neutral-100 hover:dark:bg-neutral-800 active:bg-neutral-200/50 transition text-neutral-900 dark:text-neutral-300 font-bold p-4 rounded-lg flex items-center border border-dashed border-neutral-400 dark:border-neutral-600"
-          @click.prevent="chooseDirectory"
-        >
-          <Plus />
-          <div>Add new directory</div>
-        </button>
+        <button class="add-directory" @click="chooseDirectory"><Plus /> Add music folder</button>
       </div>
-
-      <button class="button button-primary w-full p-4 rounded-lg" @click.prevent="progressStep">
-        Continue
+      <div class="setup-note">
+        <Check /><span>Lyrics stay in Lyripass until you choose to export.</span>
+      </div>
+      <button
+        class="button button-primary setup-continue"
+        :disabled="!directories.length"
+        @click="progressStep"
+      >
+        Open my library <ArrowRight />
       </button>
-    </div>
-  </div>
+      <span class="setup-formats">MP3 · FLAC · M4A · OGG · and more</span>
+    </section>
+  </main>
 </template>
 
 <script setup>
@@ -45,12 +69,16 @@ import { invoke } from '@tauri-apps/api/core'
 import { ref, onMounted } from 'vue'
 import Close from '~icons/mdi/close'
 import Plus from '~icons/mdi/plus'
+import Folder from '~icons/mdi/folder-music-outline'
+import ArrowRight from '~icons/mdi/arrow-right'
+import Check from '~icons/mdi/check'
 const emit = defineEmits(['progressStep', 'directoriesChanged'])
 
 const directories = ref([])
 const originalDirectories = ref([])
 
 const progressStep = async () => {
+  if (!directories.value.length) return
   await invoke('set_directories', { directories: directories.value })
 
   // Check if directories actually changed

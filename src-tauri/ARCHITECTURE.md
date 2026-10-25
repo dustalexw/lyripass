@@ -1,4 +1,4 @@
-# LRCGET Tauri Architecture
+# Lyripass Tauri Architecture
 
 ## Architecture Overview
 
@@ -479,3 +479,8 @@ The following deprecated functions were removed from `db.rs` (no longer used):
 - The tracks table schema for new databases (post-reset) will not include these deprecated columns
 
 **Migration v14:** Uses `ALTER TABLE DROP COLUMN` (SQLite 3.35.0+) to remove deprecated columns: `txt_lyrics`, `lrc_lyrics`, `instrumental`, `has_plain_lyrics`, `has_synced_lyrics`, `has_word_synced_lyrics`. Drops related indexes and forces a library reset.
+
+
+## Lyripass packaging
+
+`tauri.conf.json`, `tauri.macos.conf.json`, and `tauri.linux.conf.json` set the Lyripass display name, `lyripass` bundle binary, version 0.1.0, and `app.lyripass.desktop` identifier. This creates separate application storage from upstream LRCGET. The Rust package remains named `lrcget` to preserve upstream crate/test references; scanner, SQLite schema, commands, audio, network client, and export behavior are unchanged. No migration from an existing upstream database is performed. Window defaults are 1280 × 840 with a 1024 × 700 minimum. The app icon assets are generated from `public/lyripass.svg`.

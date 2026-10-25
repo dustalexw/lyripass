@@ -25,6 +25,7 @@
 
       <button
         v-if="closeButton"
+        aria-label="Close dialog"
         class="absolute top-1/2 right-0 -translate-y-1/2 flex-none button text-neutral-800 dark:text-neutral-400 rounded-full h-12 w-12"
         @click="emit('close')"
       >

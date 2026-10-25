@@ -5,6 +5,8 @@ on:
   workflow_dispatch:
 jobs:
   publish:
+    # This registration belongs to upstream LRCGET, not to Lyripass.
+    if: github.repository == 'tranxuanthang/lrcget'
     runs-on: windows-latest
     steps:
       - uses: vedantmgoyal9/winget-releaser@v2

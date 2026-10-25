@@ -1,5 +1,14 @@
 <template>
-  <div v-if="!isLoading" class="flex flex-col w-full h-screen">
+  <div v-if="!isLoading" class="library-shell flex flex-col w-full h-full">
+    <div class="workspace-heading">
+      <div>
+        <span class="studio-kicker">COLLECTION · YOUR MUSIC, CONNECTED</span>
+        <h1>Your music library</h1>
+      </div>
+      <button class="plate-button" @click="$emit('manageDirectories')">
+        <FolderMusic /> Music folders
+      </button>
+    </div>
     <LibraryHeader
       :active-tab="activeTab"
       @change-active-tab="changeActiveTab"
@@ -13,14 +22,18 @@
       @show-export-viewer="openExportViewer"
     />
 
-    <div id="library-content" class="relative grow overflow-hidden">
-      <TrackList :is-active="activeTab === 'tracks'" />
+    <div class="studio-workspace grow min-h-0">
+      <div id="library-content" class="glass-panel relative grow overflow-hidden">
+        <TrackList :is-active="activeTab === 'tracks'" />
 
-      <AlbumList ref="albumListRef" :is-active="activeTab === 'albums'" />
+        <AlbumList ref="albumListRef" :is-active="activeTab === 'albums'" />
 
-      <ArtistList ref="artistListRef" :is-active="activeTab === 'artists'" />
+        <ArtistList ref="artistListRef" :is-active="activeTab === 'artists'" />
 
-      <MyLrclib :is-active="activeTab === 'my-lrclib'" />
+        <MyLrclib :is-active="activeTab === 'my-lrclib'" />
+      </div>
+
+      <LyricsInspector />
     </div>
 
     <DownloadOptionsPopup
@@ -35,7 +48,10 @@
     <div class="animate-spin text-xl text-neutral-800">
       <Loading />
     </div>
-    <div v-if="isScanning" class="flex flex-col items-center justify-center text-sm text-neutral-500">
+    <div
+      v-if="isScanning"
+      class="flex flex-col items-center justify-center text-sm text-neutral-500"
+    >
       <div>Scanning library...</div>
       <div v-if="scanProgress" class="mt-1 font-medium">
         {{ scanProgress.message }}
@@ -54,6 +70,8 @@ import { invoke } from '@tauri-apps/api/core'
 import { listen } from '@tauri-apps/api/event'
 import Loading from '~icons/mdi/loading'
 import _ from 'lodash'
+import LyricsInspector from './LyricsInspector.vue'
+import FolderMusic from '~icons/mdi/folder-music-outline'
 import LibraryHeader from './library/LibraryHeader.vue'
 import DownloadOptionsPopup from './library/DownloadOptionsPopup.vue'
 import { useDownloadOptions } from '@/composables/download-options.js'
@@ -140,9 +158,7 @@ const { open: openExportViewer, close: closeExportViewer } = useModal({
   },
 })
 
-const {
-  addToQueue: addToExportQueue,
-} = useExporter()
+const { addToQueue: addToExportQueue } = useExporter()
 
 const { pendingNavigation, clearNavigation } = useLibraryNavigation()
 

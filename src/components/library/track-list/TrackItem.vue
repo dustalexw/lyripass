@@ -1,6 +1,6 @@
 <template>
   <div
-    class="flex w-full group hover:bg-neutral-50 hover:shadow hover:shadow-neutral-100/50 border hover:border-neutral-100 transition rounded cursor-default dark:hover:bg-neutral-900 dark:hover:border-neutral-700 dark:hover:shadow-black/50"
+    class="lyripass-track flex w-full group hover:bg-neutral-50 hover:shadow hover:shadow-neutral-100/50 border hover:border-neutral-100 transition rounded cursor-default dark:hover:bg-neutral-900 dark:hover:border-neutral-700 dark:hover:shadow-black/50"
     :class="{
       'border-neutral-100 bg-neutral-50 dark:border-neutral-700 dark:bg-neutral-900': isPlaying,
       'border-transparent': !isPlaying,
@@ -76,7 +76,12 @@
     <!-- Action buttons -->
     <div class="flex-none w-[15%] h-full flex justify-end items-center p-1">
       <div v-if="track" class="flex justify-end items-center gap-1">
-        <button v-if="isPlaying && status === 'playing'" class="track-button" @click="pause">
+        <button
+          v-if="isPlaying && status === 'playing'"
+          class="track-button"
+          aria-label="Pause track"
+          @click="pause"
+        >
           <Pause />
         </button>
         <button
@@ -86,13 +91,18 @@
         >
           <Replay />
         </button>
-        <button v-else class="track-button" @click="isPlaying ? resume() : playTrack(track)">
+        <button
+          v-else
+          class="track-button"
+          aria-label="Play track"
+          @click="isPlaying ? resume() : playTrack(track)"
+        >
           <Play />
         </button>
-        <button class="track-button" @click="searchLyrics(track)">
+        <button class="track-button" aria-label="Find lyrics" @click="searchLyrics(track)">
           <TextSearch />
         </button>
-        <button class="track-button" @click="openEditLyricsV2(track)">
+        <button class="track-button" aria-label="Edit lyrics" @click="openEditLyricsV2(track)">
           <PlaylistEdit />
         </button>
       </div>
