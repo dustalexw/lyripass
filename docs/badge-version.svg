@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="146" height="30" viewBox="0 0 146 30" role="img" aria-label="VERSION: V0.1.0">
+  <title>VERSION: V0.1.0</title>
+  <defs><clipPath id="r"><rect width="146" height="30" rx="6"/></clipPath></defs>
+  <g clip-path="url(#r)"><path fill="#20222c" d="M0 0h146v30H0z"/><path fill="#ff5a4e" d="M76 0h70v30H76z"/></g>
+  <g font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Arial, sans-serif" font-size="10" font-weight="700" text-anchor="middle" letter-spacing=".8"><text x="38.0" y="19" fill="#f5f1ea">VERSION</text><text x="111.0" y="19" fill="#0b0d12">V0.1.0</text></g>
+</svg>

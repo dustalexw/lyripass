@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="125" height="30" viewBox="0 0 125 30" role="img" aria-label="LICENSE: MIT">
+  <title>LICENSE: MIT</title>
+  <defs><clipPath id="r"><rect width="125" height="30" rx="6"/></clipPath></defs>
+  <g clip-path="url(#r)"><path fill="#20222c" d="M0 0h125v30H0z"/><path fill="#7ed6b8" d="M76 0h49v30H76z"/></g>
+  <g font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Arial, sans-serif" font-size="10" font-weight="700" text-anchor="middle" letter-spacing=".8"><text x="38.0" y="19" fill="#f5f1ea">LICENSE</text><text x="100.5" y="19" fill="#0b0d12">MIT</text></g>
+</svg>

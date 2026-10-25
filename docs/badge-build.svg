@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="167" height="30" viewBox="0 0 167 30" role="img" aria-label="BUILD: MACOS APP">
+  <title>BUILD: MACOS APP</title>
+  <defs><clipPath id="r"><rect width="167" height="30" rx="6"/></clipPath></defs>
+  <g clip-path="url(#r)"><path fill="#20222c" d="M0 0h167v30H0z"/><path fill="#5cc8ff" d="M76 0h91v30H76z"/></g>
+  <g font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Arial, sans-serif" font-size="10" font-weight="700" text-anchor="middle" letter-spacing=".8"><text x="38.0" y="19" fill="#f5f1ea">BUILD</text><text x="121.5" y="19" fill="#0b0d12">MACOS APP</text></g>
+</svg>
